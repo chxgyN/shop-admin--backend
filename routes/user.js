@@ -11,7 +11,7 @@ router.get('/userInfo', async(req, res) => {
     account: user.account,
     role: user.role,
     username: user.username,
-    avatar: user.avatar,
+    // avatar: user.avatar,
     entryTime: dayjs(user.entryTime).format(('YYYY年MM月DD日'))
   }
   res.send(JSON.stringify({
@@ -25,7 +25,7 @@ router.put('/userInfo', async(req, res) => {
   const obj = req.body
   const user = await User.findOne({account: obj.account})
   await User.updateOne({account: obj.account}, {
-    avatar: obj.avatar,
+    // avatar: obj.avatar,
     username: obj.username,
     role: obj.role
   })

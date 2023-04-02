@@ -2,6 +2,10 @@ const express = require('express')
 const router = express.Router()
 const { User } = require('../db/connect')
 
+let jwt = require('jsonwebtoken');
+
+
+
 router.post('/register', async (req, res) => {
   const obj = req.body
   const user = await User.findOne({ account: obj.account })
@@ -19,12 +23,15 @@ router.post('/register', async (req, res) => {
   }
 })
 
+
+
 router.post('/login', async (req, res) => {
   const obj = req.body
   const user = await User.findOne({
     account: obj.account,
     password: obj.password
-  })
+  })  
+  // console.log(user);
   let msg = ''
   if (user) {
     if (obj.autoLogin) {
@@ -32,13 +39,17 @@ router.post('/login', async (req, res) => {
     } else {
       msg = '登录成功'
     }
+    const token = jwt.sign(user.toJSON(), '666', { expiresIn:'1h'});
+    // console.log(token);
     res.send({
       code: 0,
       msg,
       data: {
         username: user.username,
-        avatar: user.avatar || '',
-        role: user.role
+        // avatar: user.avatar || '',
+        role: user.role,
+        token: token
+      
       }
     })
   } else {

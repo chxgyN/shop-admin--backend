@@ -92,7 +92,7 @@ router.get('/allSalesOrders', async(req, res) => {
 
 router.get('/totalSales', async(req, res) => {
   const obj = req.query
-  const type = obj.type || 'week'
+  const type = obj.type || ''
   let startTime = null
   let endTime = null
   if (type === 'week') {

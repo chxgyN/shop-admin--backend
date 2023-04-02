@@ -34,10 +34,10 @@ const userSchema = new Schema({
     type: String,
     enum: Object.keys(ROLE_LIST)
   },
-  avatar: {
-    type: String,
-    default: ''
-  },
+  // avatar: {
+  //   type: String,
+  //   default: ''
+  // },
   entryTime: { // 入职时间
     type: Number,
     required: true
